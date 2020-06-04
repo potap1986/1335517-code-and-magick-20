@@ -8,16 +8,20 @@ var wisardsQantity = 4;
 var wizards = [];
 
 var getRandomNumber = function (min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-for (var i = 0; i < wisardsQantity; i++) {
-  var wizard = {};
-  wizard.name = WIZARD_NAMES[getRandomNumber(0, WIZARD_NAMES.length)] + ' ' + WIZARD_SURNAMES[getRandomNumber(0, WIZARD_SURNAMES.length)];
-  wizard.coatColor = COAT_COLOR[getRandomNumber(0, COAT_COLOR.length)];
-  wizard.eyesColor = EYES_COLOR[getRandomNumber(0, EYES_COLOR.length)];
-  wizards.push(wizard);
-}
+var createWizars = function (count) {
+  for (var i = 0; i < count; i++) {
+    var wizard = {};
+    wizard.name = WIZARD_NAMES[getRandomNumber(0, WIZARD_NAMES.length)] + ' ' + WIZARD_SURNAMES[getRandomNumber(0, WIZARD_SURNAMES.length)];
+    wizard.coatColor = COAT_COLOR[getRandomNumber(0, COAT_COLOR.length)];
+    wizard.eyesColor = EYES_COLOR[getRandomNumber(0, EYES_COLOR.length)];
+    wizards.push(wizard);
+  }
+};
+
+createWizars(wisardsQantity);
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
@@ -39,9 +43,15 @@ var renderWizard = function (magician) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var j = 0; j < wizards.length; j++) {
-  fragment.appendChild(renderWizard(wizards[j]));
-}
+
+var renderWizars = function (count) {
+  for (var j = 0; j < count; j++) {
+    fragment.appendChild(renderWizard(wizards[j]));
+  }
+};
+
+renderWizars(wisardsQantity);
+
 similarListElement.appendChild(fragment);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
