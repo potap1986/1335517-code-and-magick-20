@@ -13,7 +13,13 @@
     }
   };
 
+  var startPositionPopup = function () {
+    setup.style.top = '80px';
+    setup.style.left = '50%';
+  };
+
   var openPopup = function () {
+    startPositionPopup();
     setup.classList.remove('hidden');
 
     document.addEventListener('keydown', onPopupEscPress);
@@ -21,8 +27,6 @@
 
   var closePopup = function () {
     setup.classList.add('hidden');
-    setup.style.top = '80px';
-    setup.style.left = '50%';
 
     document.removeEventListener('keydown', onPopupEscPress);
   };
